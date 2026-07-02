@@ -7,10 +7,10 @@ import '@/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    // <ErrorBoundary>
+     <ErrorBoundary>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    // </ErrorBoundary>
+    </ErrorBoundary>
   </>
 );
