@@ -18,3 +18,5 @@ apps/web/.env.production
 .vscode/
 .qodo/
 npm-debug.log*
+.vercel
+.env*

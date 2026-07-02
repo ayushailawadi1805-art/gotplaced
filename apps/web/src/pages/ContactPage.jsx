@@ -23,20 +23,41 @@ const ContactPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message Sent Successfully",
-        description: "Thank you for reaching out. Our team will contact you shortly.",
-        className: "bg-card border-primary text-primary",
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mvzjvgng", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        },
       });
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitting(false);
-    }, 1000);
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent Successfully",
+          description: "Thank you! We will contact you shortly.",
+          className: "bg-card border-primary text-primary",
+        });
+        // Form reset karne ke liye
+        e.target.reset(); 
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error("Failed to send");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong, please try again.",
+        variant: "destructive",
+      });
+    }
+    setIsSubmitting(false);
   };
 
   const contactInfo = [
@@ -274,7 +295,12 @@ const ContactPage = () => {
                     Send a Message
                   </h2>
 
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form 
+      action="https://formspree.io/f/mvzjvgng" 
+      method="POST"
+      onSubmit={handleSubmit} 
+      className="space-y-5"
+    >
                     <div className="space-y-2">
                       <label htmlFor="name" className="block text-sm font-medium text-gray-300">
                         Full Name
