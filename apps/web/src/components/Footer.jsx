@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Instagram, Twitter } from 'lucide-react';
+import { Linkedin, Instagram, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com' },
-    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com' },
-    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com' }
-  ];
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/company/gotplaced-in/about/' },
+  { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/gotplaced.in?igsh=bGF0M3Z0eWZuenpz' },
+  { 
+    name: 'WhatsApp', 
+    icon: MessageCircle, 
+    url: 'https://wa.me/919718550044' 
+  }
+];
 
   return (
     <footer className="bg-background border-t border-primary/20 mt-auto">

@@ -9,6 +9,7 @@ import ContactPage from '@/pages/ContactPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { Toaster } from '@/components/ui/toaster';
 
+
 function App() {
   const location = useLocation();
 
@@ -25,6 +26,7 @@ function App() {
       </AnimatePresence>
       <Footer />
       <Toaster />
+     
     </div>
   );
 }

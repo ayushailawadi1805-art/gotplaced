@@ -154,13 +154,13 @@ console.error = function(...args) {
 const configWindowFetchMonkeyPatch = `
 const originalFetch = window.fetch;
 
-window.fetch = function(...args) {
-	const url = args[0] instanceof Request ? args[0].url : args[0];
+// window.fetch = function(...args) {
+// 	const url = args[0] instanceof Request ? args[0].url : args[0];
 
-	// Skip WebSocket URLs
-	if (url.startsWith('ws:') || url.startsWith('wss:')) {
-		return originalFetch.apply(this, args);
-	}
+// 	// Skip WebSocket URLs
+// 	if (url.startsWith('ws:') || url.startsWith('wss:')) {
+// 		return originalFetch.apply(this, args);
+// 	}
 
 	return originalFetch.apply(this, args)
 		.then(async response => {
