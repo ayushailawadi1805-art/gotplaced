@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { NavLink } from "react-router-dom";
+import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,11 +9,14 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Contact Us', path: '/contact' }
-  ];
+ 
+   const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Careers', path: '/careers' },
+  { name: 'Placement Programs', path: '/programs' },   
+  { name: 'Contact Us', path: '/contact' }
+];
+  
 
   const isActive = (path) => location.pathname === path;
 
@@ -37,29 +42,49 @@ const Header = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative text-sm font-medium transition-colors ${
-                  isActive(link.path)
-                    ? 'text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-                style={isActive(link.path) ? { color: '#D4AF37' } : {}}
-              >
-                {link.name}
-                {isActive(link.path) && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute -bottom-[29px] left-0 right-0 h-0.5"
-                    style={{ backgroundColor: '#D4AF37' }}
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
+          <div className="hidden md:flex items-center space-x-6">
+
+  {navLinks.map((link) => (
+    <Link
+      key={link.path}
+      to={link.path}
+      className={`relative text-sm font-medium transition-colors ${
+        isActive(link.path)
+          ? "text-white"
+          : "text-gray-400 hover:text-white"
+      }`}
+      style={isActive(link.path) ? { color: "#D4AF37" } : {}}
+    >
+      {link.name}
+
+      {isActive(link.path) && (
+        <motion.div
+          layoutId="activeTab"
+          className="absolute -bottom-[29px] left-0 right-0 h-0.5"
+          style={{ backgroundColor: "#D4AF37" }}
+        />
+      )}
+    </Link>
+  ))}
+
+  {/* Sign In */}
+  <Link to="/login">
+    <Button
+      variant="outline"
+      className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black"
+    >
+      Sign In
+    </Button>
+  </Link>
+
+  {/* Create Account */}
+  <Link to="/register">
+    <Button className="bg-[#D4AF37] text-black hover:bg-[#c8a62e]">
+      Create Account
+    </Button>
+  </Link>
+
+</div>
 
           {/* Mobile Menu Button */}
           <button
@@ -84,22 +109,47 @@ const Header = () => {
               className="md:hidden overflow-hidden bg-[#0a0a0a] border-t border-[#D4AF37]/20"
             >
               <div className="py-4 space-y-2 px-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      isActive(link.path)
-                        ? 'bg-white/5'
-                        : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                    }`}
-                    style={isActive(link.path) ? { color: '#D4AF37' } : {}}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
+  {navLinks.map((link) => (
+    <Link
+      key={link.path}
+      to={link.path}
+      onClick={() => setMobileMenuOpen(false)}
+      className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+        isActive(link.path)
+          ? 'bg-white/5'
+          : 'text-gray-400 hover:bg-white/5 hover:text-white'
+      }`}
+      style={isActive(link.path) ? { color: '#D4AF37' } : {}}
+    >
+      {link.name}
+    </Link>
+  ))}
+
+  {/* Sign In */}
+  <Link
+    to="/login"
+    onClick={() => setMobileMenuOpen(false)}
+  >
+    <Button
+      variant="outline"
+      className="w-full border-[#D4AF37] text-[#D4AF37]"
+    >
+      Sign In
+    </Button>
+  </Link>
+
+  {/* Create Account */}
+  <Link
+    to="/register"
+    onClick={() => setMobileMenuOpen(false)}
+  >
+    <Button
+      className="w-full bg-[#D4AF37] text-black"
+    >
+      Create Account
+    </Button>
+  </Link>
+</div>
             </motion.div>
           )}
         </AnimatePresence>

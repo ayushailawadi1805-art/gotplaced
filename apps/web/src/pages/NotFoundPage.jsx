@@ -12,6 +12,9 @@ const NotFoundPage = () => {
       <Helmet>
         <title>Page Not Found - CareerPath</title>
         <meta name="description" content="The page you're looking for doesn't exist." />
+        <meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://gotplaced.in/" />
       </Helmet>
 
       <main className="flex-1 flex items-center justify-center bg-gradient-to-br from-blue-50 to-teal-50">

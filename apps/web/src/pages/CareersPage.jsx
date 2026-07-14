@@ -7,6 +7,23 @@ import CareerDetailModal from '@/components/CareerDetailModal';
 import ApplyNowModal from '@/components/ApplyNowModal';
 import { careerProfiles } from '@/lib/CareerData';
 
+<Helmet>
+  <title>Contact GotPlaced | Career Support & Placement Assistance</title>
+
+  <meta
+    name="description"
+    content="Get in touch with GotPlaced for placement guidance, program details, partnerships and career support. Contact our team today."
+  />
+
+  <meta
+    name="keywords"
+    content="Contact GotPlaced, Placement Support, Career Help, Placement Assistance"
+  />
+  <meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://gotplaced.in/" />
+</Helmet>
+
 const CATEGORIES = ['All Careers', 'Tech Careers', 'Data Analytics', 'Cybersecurity', 'MBA & Business Careers', 'AI/ML & Automation'];
 const EXPERIENCE_LEVELS = ['Beginner Friendly', 'Experienced'];
 const ROLE_TYPES = ['Technical', 'Non-Technical', 'Hybrid'];

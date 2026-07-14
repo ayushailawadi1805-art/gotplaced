@@ -16,10 +16,19 @@
     "apps/*"
   ],
   "dependencies": {
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.18.1",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "firebase": "^12.15.0",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^9.0.3",
+    "razorpay": "^2.9.6",
+    "react-helmet-async": "^3.0.0",
+    "resend": "^6.17.2"
   }
 }

@@ -7,6 +7,23 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
+<Helmet>
+  <title>Contact GotPlaced | Career Support & Placement Assistance</title>
+
+  <meta
+    name="description"
+    content="Get in touch with GotPlaced for placement guidance, program details, partnerships and career support. Contact our team today."
+  />
+
+  <meta
+    name="keywords"
+    content="Contact GotPlaced, Placement Support, Career Help, Placement Assistance"
+  />
+  <meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://gotplaced.in/" />
+</Helmet>
+
 const ContactPage = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -70,8 +87,8 @@ const ContactPage = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'ayush.ailawadi1805@gmail.com',
-      href: 'mailto:ayush.ailawadi1805@gmail.com'
+      value: 'contact@gotplaced.in',
+      href: 'mailto:contact@gotplaced.in'
     },
     {
       icon: User,

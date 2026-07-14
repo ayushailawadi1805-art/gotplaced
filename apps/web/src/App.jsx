@@ -1,4 +1,7 @@
 import React from 'react';
+import LoginPage from "./pages/LoginPage";
+import ProgramsPage from "./pages/ProgramsPage";
+import RegisterPage from "./pages/RegisterPage";
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
@@ -8,6 +11,7 @@ import CareersPage from '@/pages/CareersPage';
 import ContactPage from '@/pages/ContactPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { Toaster } from '@/components/ui/toaster';
+
 
 
 function App() {
@@ -21,7 +25,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/programs" element={<ProgramsPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </AnimatePresence>
       <Footer />

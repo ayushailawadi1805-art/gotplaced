@@ -16,6 +16,13 @@ const HomePage = () => {
       <Helmet>
         <title>GotPlaced - Premium Career Advancement</title>
         <meta name="description" content="Explore exciting careers in technology and data analytics. Find your path to success with expert guidance and resources." />
+        <meta
+    name="keywords"
+    content="Placement Preparation, Interview Preparation, Resume Building, Career Guidance, Placement Training, GotPlaced"
+  />
+  <meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://gotplaced.in/" />
       </Helmet>
 
       <main className="flex-1 bg-background">
@@ -66,10 +73,7 @@ const HomePage = () => {
         </section>
 
         {/* Testimonials Section */}
-       <section
-  id="success-stories"
-  className="py-24 bg-background border-t border-primary/10"
->
+        <section className="py-24 bg-background border-t border-primary/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
