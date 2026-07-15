@@ -286,7 +286,7 @@ logger.error = (msg, options) => {
 
 export default defineConfig({
 	optimizeDeps: {
-		include: allDeps,
+		  exclude: ["firebase"],
 	},
 	customLogger: logger,
 	plugins: [
