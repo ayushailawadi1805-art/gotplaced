@@ -137,32 +137,58 @@ export default function BlogPage() {
             </div>
           )}
           {/* Newsletter */}
+{/* Join WhatsApp Community */}
 <div className="mt-24 bg-[#1a1a1a] border border-[#D4AF37]/20 rounded-2xl p-10 text-center">
 
   <h2 className="text-4xl font-bold text-[#D4AF37]">
-    Stay Updated
+    Join Our WhatsApp Community
   </h2>
 
   <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-    Get the latest placement preparation tips, interview questions,
-    resume guides and career updates directly in your inbox.
+    Stay ahead in your placement journey with interview questions, resume tips,
+    internship alerts, off-campus drives, coding resources, and career guidance
+    delivered directly to your WhatsApp.
   </p>
 
-  <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+  <a
+    href="https://whatsapp.com/channel/0029Vb8FYo1IHph8QUSIEd3I"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block mt-8 bg-[#D4AF37] hover:bg-[#c9a227] text-black px-8 py-4 rounded-xl font-bold transition"
+  >
+    📱 Join WhatsApp Community
+  </a>
 
-    <input
-      type="email"
-      placeholder="Enter your email"
-      className="w-full sm:w-96 px-5 py-4 rounded-xl bg-[#111111] border border-[#D4AF37]/20 text-white outline-none focus:border-[#D4AF37]"
-    />
+  {/* Trust Box */}
+  <div className="mt-8 max-w-3xl mx-auto bg-[#111111] border border-[#D4AF37]/20 rounded-xl p-6">
 
-    <button
-      className="bg-[#D4AF37] text-black px-8 py-4 rounded-xl font-bold hover:bg-[#c9a227] transition"
-    >
-      Subscribe
-    </button>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+      <div>
+        <h3 className="text-2xl font-bold text-[#D4AF37]">1000+</h3>
+        <p className="text-gray-400 text-sm mt-1">Students</p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl font-bold text-[#D4AF37]">100+</h3>
+        <p className="text-gray-400 text-sm mt-1">Interview Questions</p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl font-bold text-[#D4AF37]">Daily</h3>
+        <p className="text-gray-400 text-sm mt-1">Placement Updates</p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl font-bold text-[#D4AF37]">Free</h3>
+        <p className="text-gray-400 text-sm mt-1">Career Guidance</p>
+      </div>
+
+    </div>
 
   </div>
+
+
   </div>
 
         </div>
