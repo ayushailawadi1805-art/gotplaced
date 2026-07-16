@@ -2,6 +2,9 @@ import React from 'react';
 import LoginPage from "./pages/LoginPage";
 import ProgramsPage from "./pages/ProgramsPage";
 import RegisterPage from "./pages/RegisterPage";
+import BlogPage from "./pages/BlogPage";
+import BlogDetail from "./pages/BlogDetail";
+import AdminPage from "./pages/AdminPage";
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
@@ -26,6 +29,9 @@ function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

@@ -1,3 +1,5 @@
+import blogs from "../data/blogs";
+import { Link } from "react-router-dom";
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -14,16 +16,67 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>GotPlaced - Premium Career Advancement</title>
-        <meta name="description" content="Explore exciting careers in technology and data analytics. Find your path to success with expert guidance and resources." />
-        <meta
+  <title>GotPlaced - Premium Career Advancement</title>
+
+  <meta
+    name="description"
+    content="Explore exciting careers in technology and data analytics. Find your path to success with expert guidance and resources."
+  />
+
+  <meta
     name="keywords"
     content="Placement Preparation, Interview Preparation, Resume Building, Career Guidance, Placement Training, GotPlaced"
   />
+
   <meta name="robots" content="index, follow" />
 
-<link rel="canonical" href="https://gotplaced.in/" />
-      </Helmet>
+  <link rel="canonical" href="https://gotplaced.in/" />
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GotPlaced" />
+  <meta
+    property="og:title"
+    content="GotPlaced - Premium Career Advancement"
+  />
+  <meta
+    property="og:description"
+    content="Explore exciting careers in technology and data analytics."
+  />
+  <meta property="og:url" content="https://gotplaced.in/" />
+  <meta
+    property="og:image"
+    content="https://gotplaced.in/og-image.png"
+  />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="GotPlaced - Premium Career Advancement"
+  />
+  <meta
+    name="twitter:description"
+    content="Explore exciting careers in technology and data analytics."
+  />
+  <meta
+    name="twitter:image"
+    content="https://gotplaced.in/og-image.png"
+  />
+
+  {/* Organization Schema */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "GotPlaced",
+      url: "https://gotplaced.in",
+      logo: "https://gotplaced.in/logo.png",
+      description:
+        "Placement preparation platform helping students crack interviews and build successful careers.",
+    })}
+  </script>
+</Helmet>
 
       <main className="flex-1 bg-background">
         {/* Hero Section */}
@@ -101,7 +154,79 @@ const HomePage = () => {
           </div>
         </section>
 
-        <CallToAction />
+
+
+{/* Latest Blogs */}
+<section className="py-24 bg-[#111111]">
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="flex justify-between items-center mb-12">
+      <div>
+        <h2 className="text-4xl font-bold text-[#D4AF37]">
+          Latest Blogs
+        </h2>
+
+        <p className="text-gray-400 mt-3">
+          Placement tips, interview questions and career guidance.
+        </p>
+      </div>
+
+      <Link
+        to="/blog"
+        className="text-[#D4AF37] hover:underline"
+      >
+        View All →
+      </Link>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+
+      {blogs.slice(0,3).map((blog)=>(
+
+        <div
+          key={blog.id}
+          className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-[#D4AF37]/20 hover:border-[#D4AF37] transition"
+        >
+
+          <img
+            src={blog.image}
+            alt={blog.title}
+            className="w-full h-56 object-cover"
+          />
+
+          <div className="p-6">
+
+            <span className="text-[#D4AF37] text-sm">
+              {blog.category}
+            </span>
+
+            <h3 className="text-2xl font-bold mt-3">
+              {blog.title}
+            </h3>
+
+            <p className="text-gray-400 mt-3">
+              {blog.description}
+            </p>
+
+            <Link
+              to={`/blog/${blog.slug}`}
+              className="inline-block mt-6 bg-[#D4AF37] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#c9a227]"
+            >
+              Read Article
+            </Link>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+<CallToAction />
       </main>
     </>
   );

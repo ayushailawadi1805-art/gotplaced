@@ -10,11 +10,12 @@ const Header = () => {
   const location = useLocation();
 
  
-   const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Careers', path: '/careers' },
-  { name: 'Placement Programs', path: '/programs' },   
-  { name: 'Contact Us', path: '/contact' }
+  const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Careers", path: "/careers" },
+  { name: "Placement Programs", path: "/programs" },
+  { name: "Blog", path: "/blog" },
+  { name: "Contact Us", path: "/contact" },
 ];
   
 
