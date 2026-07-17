@@ -331,6 +331,7 @@ const ProgramsPage = () => {
           body: formData,
         }
       );
+      const uploadData = await uploadResponse.json();
 
 
       if (!uploadData.secure_url) {
