@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Users } from "lucide-react";
+import { ArrowRight, Clock, Users, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
+
 
 const programs = [
   {
@@ -44,42 +44,14 @@ const programs = [
 
 const ProgramsPage = () => {
   const [selectedProgram, setSelectedProgram] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [paymentScreenshot, setPaymentScreenshot] = useState(null);
+  const [transactionId, setTransactionId] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  const handlePayment = async (amount) => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/payment/order",
-        {
-          amount,
-        }
-      );
 
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount: data.amount,
-        currency: data.currency,
-        name: "GotPlaced",
-        description: "Placement Program",
-        order_id: data.id,
-
-        handler: function (response) {
-          alert("✅ Payment Successful!");
-          console.log(response);
-          setSelectedProgram(null);
-        },
-
-        theme: {
-          color: "#D4AF37",
-        },
-      };
-
-      const razor = new window.Razorpay(options);
-      razor.open();
-    } catch (err) {
-      console.error(err);
-      alert("Payment Failed");
-    }
-  };
 
   return (
     <>
@@ -169,17 +141,23 @@ const ProgramsPage = () => {
 
         {selectedProgram && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-            <div className="bg-[#1a1a1a] border border-[#D4AF37]/30 rounded-2xl w-[90%] max-w-2xl p-8 relative">
+            <div className="bg-[#1a1a1a] border border-[#D4AF37]/30 rounded-2xl w-[90%] max-w-2xl max-h-[90vh] overflow-y-auto p-8 relative">
               <button
-                onClick={() => setSelectedProgram(null)}
-                className="absolute top-5 right-5 text-2xl text-white hover:text-[#D4AF37]"
-              >
-                ✕
-              </button>
+ onClick={() => {
+  setSelectedProgram(null);
+  setShowPayment(false);
+}}
+  className="absolute top-5 right-5 text-2xl text-white hover:text-[#D4AF37]"
+>
+  ✕
+</button>
 
-              <h2 className="text-4xl font-bold text-[#D4AF37] mb-2">
-                {selectedProgram.title}
-              </h2>
+{!showPayment ? (
+
+<>
+  <h2 className="text-4xl font-bold text-[#D4AF37] mb-2">
+    {selectedProgram.title}
+  </h2>
 
               <p className="text-gray-400 mb-6">
                 {selectedProgram.level}
@@ -213,21 +191,231 @@ const ProgramsPage = () => {
                   </ul>
                 </div>
 
-                <div className="mt-8">
-                  <Button
-                    onClick={() => handlePayment(selectedProgram.price)}
-                    className="w-full bg-[#D4AF37] text-black hover:bg-[#c99f21]"
-                  >
-                    Enroll Now - ₹{selectedProgram.price}
-                  </Button>
-                </div>
+               <div className="mt-8">
+  <Button
+    onClick={() => setShowPayment(true)}
+    className="w-full bg-[#D4AF37] text-black hover:bg-[#c99f21]"
+  >
+    Enroll Now - ₹{selectedProgram.price}
+  </Button>
+</div>
+
+</div>
+
+</>
+
+) : (
+  <div className="space-y-6">
+
+   <h2>Complete Your Payment</h2>
+
+<p>Scan the QR Code...</p>
+
+<div className="flex justify-center">
+  <img
+    src="/payment-qr.png"
+    alt="QR Code"
+    className="w-64 h-64 rounded-2xl border-4 border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+  />
+</div>
+
+{/* 👇 Ye yahan paste karna hai */}
+<div className="bg-[#111] rounded-xl p-4 space-y-2">
+  <h3 className="text-[#D4AF37] font-semibold">
+    Payment Instructions
+  </h3>
+
+  <p>1️⃣ Scan the QR Code</p>
+  <p>2️⃣ Pay ₹{selectedProgram.price}</p>
+  <p>3️⃣ Enter Transaction ID</p>
+  <p>4️⃣ Upload Screenshot</p>
+  <p>5️⃣ Click Submit Payment</p>
+</div>
+
+   <div className="bg-[#111] p-4 rounded-xl flex justify-between items-center">
+  <div>
+    <p className="text-sm text-gray-400">UPI ID</p>
+
+    <p className="text-lg font-semibold text-white">
+      ayush.ailawadi9999@oksbi
+    </p>
+  </div>
+  
+
+  <Button
+    size="sm"
+    onClick={() => {
+      navigator.clipboard.writeText("ayush.ailawadi9999@oksbi");
+      alert("UPI ID Copied!");
+    }}
+    className="bg-[#D4AF37] text-black hover:bg-[#c99f21]"
+  >
+    <Copy size={16} />
+  </Button>
+</div>
+<input
+  type="text"
+  placeholder="Enter Your Name"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  className="w-full p-3 rounded-lg bg-[#111] border border-gray-700"
+/>
+
+<input
+  type="email"
+  placeholder="Enter Your Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="w-full p-3 rounded-lg bg-[#111] border border-gray-700"
+/>
+<input
+  type="text"
+  placeholder="Enter Transaction ID"
+  value={transactionId}
+  onChange={(e) => setTransactionId(e.target.value)}
+  className="w-full p-3 rounded-lg bg-[#111] border border-gray-700"
+/>
+
+  
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files[0]) {
+      setPaymentScreenshot(e.target.files[0]);
+    }
+  }}
+  className="w-full"
+/>
+
+{paymentScreenshot && (
+  <img
+    src={URL.createObjectURL(paymentScreenshot)}
+    alt="Payment Screenshot"
+    className="w-full rounded-xl border border-[#D4AF37] mt-3"
+  />
+)}
+
+ <Button
+  onClick={async () => {
+    if (!name.trim()) {
+      alert("Please enter your name.");
+      return;
+    }
+
+    if (!email.trim()) {
+      alert("Please enter your email.");
+      return;
+    }
+
+    if (!transactionId.trim()) {
+      alert("Please enter Transaction ID.");
+      return;
+    }
+
+    if (!paymentScreenshot) {
+      alert("Please upload the payment screenshot.");
+      return;
+    }
+
+    try {
+      // Upload image to Cloudinary
+      const formData = new FormData();
+      formData.append("file", paymentScreenshot);
+      formData.append("upload_preset", "gotplaced");
+
+      const uploadResponse = await fetch(
+        "https://api.cloudinary.com/v1_1/ifvoxdcj/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+
+      if (!uploadData.secure_url) {
+        alert("Image upload failed.");
+        return;
+      }
+
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxDG1qpR574KvzM_X87MQw9v-twYB1BnRCTaq32tVzdlU3xKW4XZF0VISvzl1BqvAjEDw/exec",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            program: selectedProgram.title,
+            transactionId: transactionId,
+            screenshot: uploadData.secure_url,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("✅ Payment submitted successfully!");
+
+        setName("");
+        setEmail("");
+        setTransactionId("");
+        setPaymentScreenshot(null);
+        setShowPayment(false);
+        setSelectedProgram(null);
+      } else {
+        alert("❌ " + result.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong.");
+    }
+  }}
+  className="w-full bg-[#D4AF37] text-black hover:bg-[#c99f21]"
+>
+  Submit Payment
+</Button>
+<div className="mt-5 bg-[#111] rounded-xl p-4 border border-[#D4AF37]/30">
+  <p>🔒 Secure UPI Payment</p>
+  <p>⚡ Manual Verification within 30 Minutes</p>
+  <p>✅ Trusted by Students</p>
+</div>
+<a
+  href="https://wa.me/918505988310"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button
+    variant="outline"
+    className="w-full mt-3 border-[#D4AF37] text-[#D4AF37]"
+  >
+    Contact on WhatsApp
+  </Button>
+</a>
+
+    <Button
+      variant="outline"
+      onClick={() => setShowPayment(false)}
+      className="w-full"
+    >
+      ← Back
+    </Button>
+
+  </div>
+)}
+        
               </div>
             </div>
-          </div>
+
+          
         )}
       </section>
     </>
   );
 };
+
 
 export default ProgramsPage;
