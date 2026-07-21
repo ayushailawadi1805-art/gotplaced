@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from "@/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 import { Button } from '@/components/ui/button';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  return () => unsubscribe();
+}, []);
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    setProfileOpen(false);
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
  
   const navLinks = [
@@ -69,21 +90,74 @@ const Header = () => {
   ))}
 
   {/* Sign In */}
-  <Link to="/login">
-    <Button
-      variant="outline"
-      className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black"
+  {user ? (
+  <div className="relative">
+    <button
+      onClick={() => setProfileOpen(!profileOpen)}
+      className="flex items-center gap-2"
     >
-      Sign In
-    </Button>
-  </Link>
+      <div className="w-10 h-10 rounded-full bg-[#D4AF37] text-black flex items-center justify-center font-bold">
+  {user.displayName
+    ? user.displayName.charAt(0).toUpperCase()
+    : user.email.charAt(0).toUpperCase()}
+</div>
 
-  {/* Create Account */}
-  <Link to="/register">
-    <Button className="bg-[#D4AF37] text-black hover:bg-[#c8a62e]">
-      Create Account
-    </Button>
-  </Link>
+<span className="text-white font-medium">
+  {user.displayName || user.email}
+</span>
+
+<ChevronDown className="w-4 h-4 text-white" />
+    </button>
+
+    {profileOpen && (
+      <div className="absolute right-0 mt-3 w-56 bg-[#111] border border-[#D4AF37]/30 rounded-xl shadow-xl overflow-hidden">
+
+        <Link
+  to="/dashboard"
+  onClick={() => setProfileOpen(false)}
+  className="block px-4 py-3 hover:bg-[#D4AF37]/10"
+>
+  👤 My Dashboard
+</Link>
+
+<Link
+  to="/subscription"
+  onClick={() => setProfileOpen(false)}
+  className="block px-4 py-3 hover:bg-[#D4AF37]/10"
+>
+  💳 My Subscription
+</Link>
+
+        <button
+  onClick={handleLogout}
+  className="w-full text-left px-4 py-3 hover:bg-red-500/20 text-red-400"
+>
+  🚪 Logout
+</button>
+
+      </div>
+    )}
+
+  </div>
+) : (
+  
+  <>
+    <Link to="/login">
+      <Button
+        variant="outline"
+        className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black"
+      >
+        Sign In
+      </Button>
+    </Link>
+
+    <Link to="/register">
+      <Button className="bg-[#D4AF37] text-black hover:bg-[#c8a62e]">
+        Create Account
+      </Button>
+    </Link>
+  </>
+)}
 
 </div>
 
@@ -127,29 +201,55 @@ const Header = () => {
   ))}
 
   {/* Sign In */}
-  <Link
-    to="/login"
-    onClick={() => setMobileMenuOpen(false)}
-  >
-    <Button
-      variant="outline"
-      className="w-full border-[#D4AF37] text-[#D4AF37]"
+  {user ? (
+  <>
+    <Link
+      to="/dashboard"
+      onClick={() => setMobileMenuOpen(false)}
+      className="block px-4 py-2 rounded-lg hover:bg-white/5"
     >
-      Sign In
-    </Button>
-  </Link>
+      👤 My Dashboard
+    </Link>
 
-  {/* Create Account */}
-  <Link
-    to="/register"
-    onClick={() => setMobileMenuOpen(false)}
-  >
-    <Button
-      className="w-full bg-[#D4AF37] text-black"
+    <Link
+      to="/subscription"
+      onClick={() => setMobileMenuOpen(false)}
+      className="block px-4 py-2 rounded-lg hover:bg-white/5"
     >
-      Create Account
-    </Button>
-  </Link>
+      💳 My Subscription
+    </Link>
+
+    <button
+      onClick={handleLogout}
+      className="w-full text-left px-4 py-2 rounded-lg text-red-400 hover:bg-red-500/20"
+    >
+      🚪 Logout
+    </button>
+  </>
+) : (
+  <>
+    <Link
+      to="/login"
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      <Button
+        variant="outline"
+        className="w-full border-[#D4AF37] text-[#D4AF37]"
+      >
+        Sign In
+      </Button>
+    </Link>
+
+    <Link
+      to="/register"
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      <Button className="w-full bg-[#D4AF37] text-black">
+        Create Account
+      </Button>
+    </Link>
+  </>
+)}
 </div>
             </motion.div>
           )}

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Helmet } from 'react-helmet';
 import axios from "axios";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 
 <Helmet>
@@ -40,9 +41,15 @@ export default function RegisterPage() {
         password
       );
 
-      await updateProfile(userCredential.user, {
-        displayName: name,
-      });
+     await setDoc(doc(db, "users", userCredential.user.uid), {
+  uid: userCredential.user.uid,
+  name: name,
+  email: email,
+  program: "Not Selected",
+  subscription: "Pending",
+  payment: "Pending",
+  createdAt: serverTimestamp(),
+});
       await axios.post("http://localhost:5000/api/send-welcome-email", {
   name,
   email,

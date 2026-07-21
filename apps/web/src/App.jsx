@@ -5,9 +5,12 @@ import RegisterPage from "./pages/RegisterPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetail from "./pages/BlogDetail";
 import AdminPage from "./pages/AdminPage";
+import Dashboard from "./pages/Dashboard";
 
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import Admin from "./pages/Admin";
+import Subscription from "@/pages/Subscription";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HomePage from '@/pages/HomePage';
@@ -32,9 +35,12 @@ function App() {
           <Route path="/programs" element={<ProgramsPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/blogs" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/subscription" element={<Subscription />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </AnimatePresence>

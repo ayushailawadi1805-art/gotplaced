@@ -31,26 +31,43 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <span className="text-lg font-serif font-semibold text-primary">Quick Links</span>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/careers" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </div>
+         <div>
+  <h3 className="text-[#D4AF37] font-bold text-2xl mb-6">
+    Quick Links
+  </h3>
+
+  <ul className="space-y-3">
+    <li>
+      <Link to="/" className="hover:text-[#D4AF37]">
+        Home
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/careers" className="hover:text-[#D4AF37]">
+        Careers
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/programs" className="hover:text-[#D4AF37]">
+        Placement Programs
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/blog" className="hover:text-[#D4AF37]">
+        Blogs
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/contact" className="hover:text-[#D4AF37]">
+        Contact Us
+      </Link>
+    </li>
+  </ul>
+</div>
 
           {/* Social Media */}
           <div>

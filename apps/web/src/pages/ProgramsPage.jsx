@@ -3,6 +3,9 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Users, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "@/firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 
 const programs = [
@@ -43,6 +46,7 @@ const programs = [
 ];
 
 const ProgramsPage = () => {
+  const navigate = useNavigate();
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
   const [paymentScreenshot, setPaymentScreenshot] = useState(null);
@@ -358,22 +362,27 @@ const ProgramsPage = () => {
 
       const result = await response.json();
 
-      if (result.success) {
-        alert("✅ Payment submitted successfully!");
+    if (result.success) {
+ const user = auth.currentUser;
 
-        setName("");
-        setEmail("");
-        setTransactionId("");
-        setPaymentScreenshot(null);
-        setShowPayment(false);
-        setSelectedProgram(null);
-      } else {
+if (user) {
+  await updateDoc(doc(db, "users", user.uid), {
+    program: selectedProgram.title,
+    transactionId: transactionId,
+    payment: "Pending",
+    subscription: "Pending",
+    screenshot: uploadData.secure_url,
+  });
+}
+
+navigate("/subscription");
+}else {
         alert("❌ " + result.error);
       }
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong.");
-    }
+  console.error("Full Error:", err);
+  alert(err.message);
+}
   }}
   className="w-full bg-[#D4AF37] text-black hover:bg-[#c99f21]"
 >
