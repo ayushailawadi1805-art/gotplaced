@@ -28,6 +28,7 @@ function App() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       <AnimatePresence mode="wait">
+        
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<HomePage />} />
           <Route path="/careers" element={<CareersPage />} />
@@ -39,6 +40,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          
           <Route path="/admin" element={<Admin />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/register" element={<RegisterPage />} />
