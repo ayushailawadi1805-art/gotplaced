@@ -18,6 +18,7 @@ import CareersPage from '@/pages/CareersPage';
 import ContactPage from '@/pages/ContactPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { Toaster } from '@/components/ui/toaster';
+import AIAssistantPage from "./pages/AIAssistantPage";
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/admin/blogs" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/ai" element={<AIAssistantPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           
@@ -48,6 +50,7 @@ function App() {
       </AnimatePresence>
       <Footer />
       <Toaster />
+    
      
     </div>
   );

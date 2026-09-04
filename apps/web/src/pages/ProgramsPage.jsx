@@ -43,6 +43,24 @@ const programs = [
   "10-15 interview lineups within 2-3 months ",
 ],
   },
+  {
+    title: "Premium Program",
+    level: "For Serious Career Growth",
+    students: "50+ Professionals",
+    price: 26000,
+    description:
+      "A complete career transformation program designed for candidates who want personalized guidance, advanced career development, expert mentorship, ATS-optimized resume building, LinkedIn personal branding, intensive interview preparation, and dedicated placement support.",
+    color: "from-purple-500 to-pink-500",
+    syllabus: [
+       "Advanced Career Growth Roadmap",
+  "ATS-Optimized Resume Enhancement",
+  "LinkedIn Personal Branding",
+  "1:1 Industry Expert Mentorship",
+  "Interview Preparation with Mock Sessions",
+  "Connecting you to 10,000 + HR's ",
+    ],
+  },
+
 ];
 
 const ProgramsPage = () => {
@@ -175,7 +193,13 @@ const ProgramsPage = () => {
 
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold text-[#D4AF37]">
-                    Program Fee: ₹{selectedProgram.price}
+                <div className="flex items-center gap-2">
+  <span className="text-2xl font-bold text-[#D4AF37]">
+    {selectedProgram.title === "Premium Program"
+      ? `Payment Fee: ₹${selectedProgram.price}`
+      : `Enrollment Fee: ₹${selectedProgram.price}`}
+  </span>
+</div>
                   </span>
                 </div>
 

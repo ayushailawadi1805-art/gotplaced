@@ -6,11 +6,13 @@ const Razorpay = require("razorpay");
 const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const aiRoutes = require("./routes/ai");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/ai", aiRoutes);
 
 // Razorpay Instance
 const razorpay = new Razorpay({
