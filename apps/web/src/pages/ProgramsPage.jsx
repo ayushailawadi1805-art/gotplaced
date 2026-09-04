@@ -196,8 +196,8 @@ const ProgramsPage = () => {
                 <div className="flex items-center gap-2">
   <span className="text-2xl font-bold text-[#D4AF37]">
     {selectedProgram.title === "Premium Program"
-      ? `Payment Fee: ₹${selectedProgram.price}`
-      : `Enrollment Fee: ₹${selectedProgram.price}`}
+      ? `Program Fee: ₹${selectedProgram.price}`
+      : `Enrollment Charges: ₹${selectedProgram.price}`}
   </span>
 </div>
                   </span>
